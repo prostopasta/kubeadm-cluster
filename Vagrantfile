@@ -5,10 +5,10 @@ ENV['VAGRANT_SERVER_URL'] ='https://vagrant.elab.pro'
 
 # Define the number of master and worker nodes
 # If this number is changed, remember to update setup-hosts.sh script with the new hosts IP details in /etc/hosts of each VM.
-NUM_MASTER_NODE = 2 
-NUM_WORKER_NODE = 1
+NUM_MASTER_NODE = 1
+NUM_WORKER_NODE = 2
 
-IP_NW = "192.168.77."
+IP_NW = "192.168.56."
 MASTER_IP_START = 1
 NODE_IP_START = 2
 LB_IP_START = 30
@@ -55,10 +55,10 @@ Vagrant.configure("2") do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
-  
+
   # Provision Load Balancer Node
-  
-  if NUM_MASTER_NODE > 1 
+
+  if NUM_MASTER_NODE > 1
     config.vm.define "lb" do |node|
 
       node.vm.provider "virtualbox" do |vb|
