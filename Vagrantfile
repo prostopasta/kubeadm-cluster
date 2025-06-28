@@ -5,7 +5,7 @@ ENV['VAGRANT_SERVER_URL'] ='https://vagrant.elab.pro'
 
 # Define the number of master and worker nodes
 # If this number is changed, remember to update setup-hosts.sh script with the new hosts IP details in /etc/hosts of each VM.
-NUM_MASTER_NODE = 1
+NUM_MASTER_NODE = 3
 NUM_WORKER_NODE = 2
 
 IP_NW = "192.168.56."
@@ -77,6 +77,9 @@ Vagrant.configure("2") do |config|
       end
 
       node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+      node.vm.provision "setup-haproxy", type: "shell", :path => "ubuntu/setup-lb-haproxy.sh" do |s|
+        s.args = ["enp0s8"]
+      end
     end
   end
 
@@ -98,7 +101,8 @@ Vagrant.configure("2") do |config|
         end
 
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
-
+        node.vm.provision "setup-containerd", type: "shell", :path => "ubuntu/setup-containerd.sh"
+        node.vm.provision "setup-kubeadm", type: "shell", :path => "ubuntu/setup-kubeadm.sh"
       end
   end
 
@@ -120,6 +124,8 @@ Vagrant.configure("2") do |config|
         end
 
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        node.vm.provision "setup-containerd", type: "shell", :path => "ubuntu/setup-containerd.sh"
+        node.vm.provision "setup-kubeadm", type: "shell", :path => "ubuntu/setup-kubeadm.sh"
     end
   end
 end
