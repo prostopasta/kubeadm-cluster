@@ -101,6 +101,7 @@ Vagrant.configure("2") do |config|
         end
 
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        node.vm.provision "allow-bridge-nf-traffic", type: "shell", :path => "ubuntu/allow-bridge-nf-traffic.sh"
         node.vm.provision "setup-containerd", type: "shell", :path => "ubuntu/setup-containerd.sh"
         node.vm.provision "setup-kubeadm", type: "shell", :path => "ubuntu/setup-kubeadm.sh"
       end
@@ -124,6 +125,7 @@ Vagrant.configure("2") do |config|
         end
 
         node.vm.provision "setup-dns", type: "shell", :path => "ubuntu/update-dns.sh"
+        node.vm.provision "allow-bridge-nf-traffic", type: "shell", :path => "ubuntu/allow-bridge-nf-traffic.sh"
         node.vm.provision "setup-containerd", type: "shell", :path => "ubuntu/setup-containerd.sh"
         node.vm.provision "setup-kubeadm", type: "shell", :path => "ubuntu/setup-kubeadm.sh"
     end

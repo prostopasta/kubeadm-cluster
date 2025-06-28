@@ -29,7 +29,7 @@ else
 fi
 
 # Ensure the sysctl settings for bridge-nf traffic are present
-if grep -q "net.bridge.bridge-nf-call-iptables" /etc/sysctl.d/k8s.conf; then
+if grep -Eq "^net.bridge.bridge-nf-call-iptables.?=.?1" /etc/sysctl.d/k8s.conf; then
     echo "Sysctl settings for bridge-nf traffic are already applied."
 else
     # Ensure the necessary sysctl settings are applied
@@ -43,7 +43,7 @@ else
 fi
 
 # Enable IP forwarding
-if grep -q "net.ipv4.ip_forward" /etc/sysctl.conf; then
+if grep -Eq "^net.ipv4.ip_forward.?=.?1" /etc/sysctl.conf; then
     echo "IP forwarding is already enabled."
 else
     echo "Enabling IP forwarding..."

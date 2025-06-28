@@ -20,3 +20,8 @@ systemctl start kubelet
 # Disable swap
 swapoff -a
 sed -i '/ swap / s/^/#/' /etc/fstab
+
+# Check versions
+kubelet --version
+kubeadm version
+kubectl version --client
