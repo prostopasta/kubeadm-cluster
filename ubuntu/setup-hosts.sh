@@ -10,7 +10,7 @@ IFNAME=$1
 ADDRESS="$(ip -4 addr show "${IFNAME}" | grep "inet" | head -1 |awk '{print $2}' | cut -d/ -f1)"
 NETWORK=$(echo "${ADDRESS}" | awk 'BEGIN {FS="."} ; { printf("%s.%s.%s", $1, $2, $3) }')
 
-sed -e "s/^.*${HOSTNAME}.*/${ADDRESS} ${HOSTNAME} ${HOSTNAME}.local/" -i /etc/hosts
+#sed -e "s/^.*${HOSTNAME}.*/${ADDRESS} ${HOSTNAME} ${HOSTNAME}.local/" -i /etc/hosts
 
 # remove ubuntu-jammy entry
 sed -e '/^.*ubuntu-jammy.*/d' -i /etc/hosts
